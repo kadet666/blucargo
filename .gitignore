@@ -1,0 +1,9 @@
+.project
+.settings
+.svn
+dep.txt
+*~
+target
+.classpath
+.gwt
+/target/*

@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.blusoft</groupId>
+		<artifactId>blucargo</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>webapp</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+	</properties>
+
+	<dependencies>
+
+	    <dependency>
+	        <groupId>com.blusoft.blucargo</groupId>
+			<artifactId>service</artifactId>
+			<version>${project.parent.version}</version>
+	    </dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- this is the dependency to the "jar"-subproject -->
+		<dependency>
+			<groupId>org.codehaus.mojo.gwt.it</groupId>
+			<artifactId>domain</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<executions>
+					<!-- GWT version detected from dependencyManagement -->
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>test</goal>
+							<!--goal>i18n</goal -->
+							<goal>generateAsync</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- runTarget>org.codehaus.mojo.gwt.test.Hello/Hello.html</runTarget -->
+					<runTarget>blucargo.html</runTarget>
+					<draftCompile>true</draftCompile>
+					<optimizationLevel>1</optimizationLevel>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- webappDirectory>${webappDirectory}</webappDirectory -->
+					<!-- warSourceDirectory>war</warSourceDirectory -->
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

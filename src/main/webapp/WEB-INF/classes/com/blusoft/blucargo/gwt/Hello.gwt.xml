@@ -1,0 +1,9 @@
+<module rename-to="hello">
+  <inherits name="com.google.gwt.user.User"/>
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
+  <entry-point class="com.blusoft.blucargo.gwt.client.Hello"/>
+
+  <source path='client' />
+  <source path='shared' />
+</module>
