@@ -6,20 +6,16 @@ import java.util.List;
 
 import com.google.gwt.cell.client.DateCell;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
-public class Hello implements EntryPoint {
+public class OfferList implements EntryPoint {
 
 	/**
 	 * A simple data type that represents a contact.
@@ -99,33 +95,6 @@ public class Hello implements EntryPoint {
 
 		// Add it to the root panel.
 		RootPanel.get().add(table);
-
-		TestServiceAsync testService = (TestServiceAsync) GWT.create(TestService.class);
-
-		AsyncCallback callback = new AsyncCallback() {
-
-			public void onFailure(Throwable caught) {
-				// do some UI stuff to show failure
-			}
-
-			public void onSuccess(Object result) {
-				final Label testLabel = new Label(result.toString());
-
-				RootPanel.get("testContainer").add(testLabel);
-			}
-		};
-
-		testService.test(callback);
-
-		final Label testLabel = new Label("This is a test");
-
-		RootPanel.get("testContainer").add(testLabel);
-
-		final Label l = new Label("GWT says : hello");
-		RootPanel.get().add(l);
-
-		Button b = new Button("click me !");
-		RootPanel.get().add(b);
 
 	}
 }

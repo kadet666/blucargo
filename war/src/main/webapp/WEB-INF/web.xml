@@ -28,7 +28,7 @@
 
  	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>blucargo.html</welcome-file>
+		<welcome-file>offerList.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>
