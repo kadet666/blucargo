@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.blusoft.blucargo.dao.CarBodyDao;
 import com.blusoft.blucargo.model.CarBody;
-import com.blusoft.blucargo.services.CarBodyService;
+import com.blusoft.blucargo.service.CarBodyService;
 
 @Transactional
 @Service("CarBodyService")

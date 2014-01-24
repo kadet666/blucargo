@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.blusoft.blucargo.dao.CityDao;
 import com.blusoft.blucargo.model.City;
-import com.blusoft.blucargo.services.CityService;
+import com.blusoft.blucargo.service.CityService;
 
 @Transactional
 @Service("CityService")

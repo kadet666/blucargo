@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.blusoft.blucargo.dao.SearchCriteriaDao;
 import com.blusoft.blucargo.model.SearchCriteria;
-import com.blusoft.blucargo.services.SearchCriteriaService;
+import com.blusoft.blucargo.service.SearchCriteriaService;
 
 @Transactional
 @Service("SearchCriteriaService")

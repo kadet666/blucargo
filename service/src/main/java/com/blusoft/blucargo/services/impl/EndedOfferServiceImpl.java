@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.blusoft.blucargo.dao.EndedOfferDao;
 import com.blusoft.blucargo.model.CargoOffer;
 import com.blusoft.blucargo.model.EndedOffer;
-import com.blusoft.blucargo.services.EndedOfferService;
+import com.blusoft.blucargo.service.EndedOfferService;
 
 @Transactional
 @Service("EndedOfferService")

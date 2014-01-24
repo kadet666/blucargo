@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.blusoft.blucargo.dao.AcceptedOfferDao;
 import com.blusoft.blucargo.model.AcceptedOffer;
 import com.blusoft.blucargo.model.CargoOffer;
-import com.blusoft.blucargo.services.AcceptedOfferService;
+import com.blusoft.blucargo.service.AcceptedOfferService;
 
 @Transactional
 @Service("AcceptedOfferService")

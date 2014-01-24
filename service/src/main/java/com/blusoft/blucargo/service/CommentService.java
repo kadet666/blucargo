@@ -1,4 +1,4 @@
-package com.blusoft.blucargo.services;
+package com.blusoft.blucargo.service;
 
 import java.util.List;
 

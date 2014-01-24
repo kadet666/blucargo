@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.blusoft.blucargo.dao.FavouriteOfferDao;
 import com.blusoft.blucargo.model.CargoOffer;
 import com.blusoft.blucargo.model.FavouriteOffer;
-import com.blusoft.blucargo.services.FavouriteOfferService;
+import com.blusoft.blucargo.service.FavouriteOfferService;
 
 @Transactional
 @Service("FavouriteOfferService")

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.blusoft.blucargo.dao.CommentDao;
 import com.blusoft.blucargo.model.Comment;
 import com.blusoft.blucargo.model.CommentAndOffer;
-import com.blusoft.blucargo.services.CommentService;
+import com.blusoft.blucargo.service.CommentService;
 
 @Transactional
 @Service("CommentService")

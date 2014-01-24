@@ -1,4 +1,4 @@
-package com.blusoft.blucargo.services;
+package com.blusoft.blucargo.service;
 
 import java.util.List;
 
@@ -24,4 +24,5 @@ public interface CargoOfferService {
 	public CargoOffer findById(long id);
 
 	public CargoOffer findOfferById(long id);
+
 }

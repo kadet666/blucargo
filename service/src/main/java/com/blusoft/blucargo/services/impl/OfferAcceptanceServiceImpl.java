@@ -12,7 +12,7 @@ import com.blusoft.blucargo.dao.OfferAcceptanceDao;
 import com.blusoft.blucargo.model.AcceptedOffer;
 import com.blusoft.blucargo.model.CargoOffer;
 import com.blusoft.blucargo.model.OfferAcceptance;
-import com.blusoft.blucargo.services.OfferAcceptanceService;
+import com.blusoft.blucargo.service.OfferAcceptanceService;
 
 @Transactional
 @Service("OfferAcceptanceService")

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.blusoft.blucargo.dao.RegistrationDataDao;
 import com.blusoft.blucargo.model.RegistrationData;
-import com.blusoft.blucargo.services.RegistrationDataService;
+import com.blusoft.blucargo.service.RegistrationDataService;
 
 @Transactional
 @Service("RegistrationDataService")
