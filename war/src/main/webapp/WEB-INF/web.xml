@@ -21,9 +21,19 @@
 		<servlet-class>com.blusoft.blucargo.gwt.server.TestServiceImpl</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>cargoOfferGWTService</servlet-name>
+		<servlet-class>com.blusoft.blucargo.gwt.server.CargoOfferGWTServiceImpl</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>testService</servlet-name>
 		<url-pattern>/hello/testService</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>cargoOfferGWTService</servlet-name>
+		<url-pattern>/offerList/CargoOfferGWTService</url-pattern>
 	</servlet-mapping>
 
  	<!-- Default page to serve -->
