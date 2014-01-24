@@ -1,6 +1,7 @@
 <module rename-to="offerList">
   <inherits name="com.google.gwt.user.User"/>
   <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+  <inherits name='com.blusoft.blucargo.Model'/>
 
   <entry-point class="com.blusoft.blucargo.gwt.client.OfferList"/>
 

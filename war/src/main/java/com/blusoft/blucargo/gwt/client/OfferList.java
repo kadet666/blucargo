@@ -1,100 +1,193 @@
 package com.blusoft.blucargo.gwt.client;
 
-import java.util.Arrays;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.cell.client.DateCell;
+import com.blusoft.blucargo.model.CargoOffer;
+import com.blusoft.blucargo.model.OfferType;
+import com.google.gwt.cell.client.SafeHtmlCell;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.shared.DateTimeFormat;
+import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 public class OfferList implements EntryPoint {
 
-	/**
-	 * A simple data type that represents a contact.
-	 */
-	private static class Contact {
-		private final String address;
-		private final Date birthday;
-		private final String name;
-
-		public Contact(String name, Date birthday, String address) {
-			this.name = name;
-			this.birthday = birthday;
-			this.address = address;
-		}
-	}
-
-	/**
-	 * The list of data to display.
-	 */
-	private static final List<Contact> CONTACTS = Arrays.asList(new Contact("John", new Date(80, 4, 12), "123 Fourth Avenue"), new Contact("Joe", new Date(85,
-			2, 22), "22 Lance Ln"), new Contact("George", new Date(46, 6, 6), "1600 Pennsylvania Avenue"));
-
 	public void onModuleLoad() {
 
-		// Create a CellTable.
-		CellTable<Contact> table = new CellTable<Contact>();
-		table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+		CargoOfferGWTServiceAsync cargoOfferService = (CargoOfferGWTServiceAsync) GWT.create(CargoOfferGWTService.class);
 
-		// Add a text column to show the name.
-		TextColumn<Contact> nameColumn = new TextColumn<Contact>() {
-			@Override
-			public String getValue(Contact object) {
-				return object.name;
-			}
-		};
-		table.addColumn(nameColumn, "Name");
+		final List<CargoOffer> cargoOffers = new ArrayList<CargoOffer>();
 
-		// Add a date column to show the birthday.
-		DateCell dateCell = new DateCell();
-		Column<Contact, Date> dateColumn = new Column<Contact, Date>(dateCell) {
-			@Override
-			public Date getValue(Contact object) {
-				return object.birthday;
-			}
-		};
-		table.addColumn(dateColumn, "Birthday");
+		final CellTable<CargoOffer> table = createCargoOfferTable();
 
-		// Add a text column to show the address.
-		TextColumn<Contact> addressColumn = new TextColumn<Contact>() {
-			@Override
-			public String getValue(Contact object) {
-				return object.address;
-			}
-		};
-		table.addColumn(addressColumn, "Address");
-
-		// Add a selection model to handle user selection.
-		final SingleSelectionModel<Contact> selectionModel = new SingleSelectionModel<Contact>();
-		table.setSelectionModel(selectionModel);
-		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-			public void onSelectionChange(SelectionChangeEvent event) {
-				Contact selected = selectionModel.getSelectedObject();
-				if (selected != null) {
-					Window.alert("You selected: " + selected.name);
-				}
-			}
-		});
-
-		// Set the total row count. This isn't strictly necessary, but it
-		// affects
-		// paging calculations, so its good habit to keep the row count up to
-		// date.
-		table.setRowCount(CONTACTS.size(), true);
-
-		// Push the data into the widget.
-		table.setRowData(0, CONTACTS);
+		getCargoOffersAndPopulateTable(cargoOfferService, cargoOffers, table);
 
 		// Add it to the root panel.
 		RootPanel.get().add(table);
 
+	}
+
+	private void getCargoOffersAndPopulateTable(CargoOfferGWTServiceAsync cargoOfferService, final List<CargoOffer> cargoOffers,
+			final CellTable<CargoOffer> table) {
+		AsyncCallback allCargoOffersCallback = new AsyncCallback() {
+
+			public void onFailure(Throwable caught) {
+				// do some UI stuff to show failure
+			}
+
+			public void onSuccess(Object result) {
+
+				List<CargoOffer> list = (List<CargoOffer>) result;
+				cargoOffers.clear();
+				cargoOffers.addAll(list);
+
+				// Set the total row count. This isn't strictly necessary, but
+				// it
+				// affects
+				// paging calculations, so its good habit to keep the row count
+				// up to
+				// date.
+				table.setRowCount(cargoOffers.size(), true);
+
+				// Push the data into the widget.
+				table.setRowData(0, cargoOffers);
+
+			}
+		};
+
+		cargoOfferService.findAllThatAreNotAcceptedNorDeleted(allCargoOffersCallback);
+	}
+
+	private CellTable<CargoOffer> createCargoOfferTable() {
+		final CellTable<CargoOffer> table = new CellTable<CargoOffer>();
+
+		table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+		TextColumn<CargoOffer> offerType = new TextColumn<CargoOffer>() {
+			@Override
+			public String getValue(CargoOffer object) {
+				if (OfferType.CARGO == object.getType()) {
+					return "Ładunek";
+				} else if (OfferType.VEHICLE == object.getType()) {
+					return "Pojazd";
+				}
+				return null;
+			}
+		};
+		table.addColumn(offerType, "Rodzaj ogłoszenia");
+
+		final SafeHtmlCell fromCell = new SafeHtmlCell();
+
+		Column<CargoOffer, SafeHtml> fromColumn = new Column<CargoOffer, SafeHtml>(fromCell) {
+			@Override
+			public SafeHtml getValue(CargoOffer offer) {
+
+				SafeHtmlBuilder sb = new SafeHtmlBuilder();
+				sb.appendHtmlConstant(offer.getCountryFrom()).appendHtmlConstant("<br>").appendHtmlConstant(offer.getCityFrom())
+						.appendHtmlConstant(offer.getPostOfficeFrom());
+				return sb.toSafeHtml();
+
+			}
+		};
+		table.addColumn(fromColumn, "Załadunek");
+
+		final SafeHtmlCell toCell = new SafeHtmlCell();
+		Column<CargoOffer, SafeHtml> toColumn = new Column<CargoOffer, SafeHtml>(toCell) {
+			@Override
+			public SafeHtml getValue(CargoOffer offer) {
+
+				SafeHtmlBuilder sb = new SafeHtmlBuilder();
+
+				sb.appendHtmlConstant(offer.getCountryTo()).appendHtmlConstant("<br>").appendHtmlConstant(offer.getCityTo())
+						.appendHtmlConstant(offer.getPostOfficeTo());
+				return sb.toSafeHtml();
+
+			}
+		};
+		table.addColumn(toColumn, "Rozładunek");
+
+		final SafeHtmlCell vehicleCell = new SafeHtmlCell();
+		Column<CargoOffer, SafeHtml> vehicle = new Column<CargoOffer, SafeHtml>(vehicleCell) {
+			@Override
+			public SafeHtml getValue(CargoOffer offer) {
+
+				SafeHtmlBuilder sb = new SafeHtmlBuilder();
+				sb.appendHtmlConstant(offer.getVolume()).appendHtmlConstant("<br>").appendHtmlConstant(offer.getBody())
+						.appendHtmlConstant(offer.getCargoLength());
+				return sb.toSafeHtml();
+
+			}
+		};
+		table.addColumn(toColumn, "Pojazd");
+
+		final SafeHtmlCell countryFromCell = new SafeHtmlCell();
+		Column<CargoOffer, SafeHtml> countryFromColumn = new Column<CargoOffer, SafeHtml>(countryFromCell) {
+			@Override
+			public SafeHtml getValue(CargoOffer offer) {
+
+				String dzien = DateTimeFormat.getFormat("d-M-yyyy").format(offer.getSubmissionDate());
+				String godzina = DateTimeFormat.getFormat("mm:KK").format(offer.getSubmissionDate());
+
+				SafeHtmlBuilder sb = new SafeHtmlBuilder();
+				sb.appendHtmlConstant(dzien).appendHtmlConstant("\n godz").appendHtmlConstant(godzina);
+				return sb.toSafeHtml();
+
+			}
+		};
+		table.addColumn(countryFromColumn, "Zgłoszono");
+
+		final SafeHtmlCell validToCell = new SafeHtmlCell();
+		Column<CargoOffer, SafeHtml> validTo = new Column<CargoOffer, SafeHtml>(validToCell) {
+			@Override
+			public SafeHtml getValue(CargoOffer offer) {
+
+				String dzien = DateTimeFormat.getFormat("d-M-yyyy").format(offer.getOfferValid());
+				String godzina = DateTimeFormat.getFormat("mm:KK").format(offer.getOfferValid());
+
+				SafeHtmlBuilder sb = new SafeHtmlBuilder();
+				sb.appendHtmlConstant(dzien).appendHtmlConstant("<br> godz").appendHtmlConstant(godzina);
+				return sb.toSafeHtml();
+
+			}
+		};
+		table.addColumn(validTo, "Ważne do");
+
+		final SafeHtmlCell contactCell = new SafeHtmlCell();
+		Column<CargoOffer, SafeHtml> contact = new Column<CargoOffer, SafeHtml>(contactCell) {
+			@Override
+			public SafeHtml getValue(CargoOffer offer) {
+
+				SafeHtmlBuilder sb = new SafeHtmlBuilder();
+				sb.appendHtmlConstant(offer.getContact());
+
+				return sb.toSafeHtml();
+
+			}
+		};
+		table.addColumn(contact, "Kontakt");
+
+		// Add a selection model to handle user selection.
+		final SingleSelectionModel<CargoOffer> selectionModel = new SingleSelectionModel<CargoOffer>();
+		table.setSelectionModel(selectionModel);
+		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+			public void onSelectionChange(SelectionChangeEvent event) {
+				CargoOffer selected = selectionModel.getSelectedObject();
+				if (selected != null) {
+					Window.alert("You selected: " + selected.getAddressFrom());
+				}
+			}
+		});
+		return table;
 	}
 }

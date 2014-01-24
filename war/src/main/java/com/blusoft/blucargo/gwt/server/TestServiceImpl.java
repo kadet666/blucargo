@@ -7,7 +7,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.blusoft.blucargo.gwt.client.TestService;
 import com.blusoft.blucargo.model.CargoOffer;
-import com.blusoft.blucargo.services.CargoOfferService;
+import com.blusoft.blucargo.service.CargoOfferService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
