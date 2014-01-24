@@ -40,6 +40,7 @@
 							<mainClass>com.blusoft.blucargo.dao.ddl.SchemaExport</mainClass>
 							<arguments>
 								<argument>--create</argument>
+								<argument>--drop</argument>
 								<argument>--delimiter=;</argument>
 								<argument>--hsqlCreateOutput=${project.basedir}/src/test/resources/sql/hsql-schema.sql</argument>
 								<argument>--hsqlDropOutput=${project.basedir}/src/test/resources/sql/drop-hsql-schema.sql</argument>
