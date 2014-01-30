@@ -22,11 +22,20 @@
 			<artifactId>service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.blusoft.blucargo</groupId>
 			<artifactId>model</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.blusoft.blucargo</groupId>
+			<artifactId>model</artifactId>
+			<version>${project.parent.version}</version>
+			<classifier>sources</classifier>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -37,6 +46,8 @@
 			<artifactId>joda-time</artifactId>
 			<version>${joda.time.version}</version>
 		</dependency>
+
+		<!-- GWT -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
@@ -69,11 +80,29 @@
 					</execution>
 				</executions>
 				<configuration>
+
 					<!-- runTarget>org.codehaus.mojo.gwt.test.Hello/Hello.html</runTarget -->
 					<runTarget>blucargo.html</runTarget>
 					<draftCompile>true</draftCompile>
 					<optimizationLevel>1</optimizationLevel>
 				</configuration>
+				<!--  dependencies>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-dev</artifactId>
+						<version>${gwt.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-codeserver</artifactId>
+						<version>${gwt.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-user</artifactId>
+						<version>${gwt.version}</version>
+					</dependency>
+				</dependencies-->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -95,4 +124,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
 </project>

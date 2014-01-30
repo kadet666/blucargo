@@ -2,6 +2,7 @@
 .settings
 .svn
 dep.txt
+rebel.xml
 *~
 target
 .classpath

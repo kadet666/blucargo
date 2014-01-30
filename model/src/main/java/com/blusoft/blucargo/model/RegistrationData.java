@@ -10,23 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
-@Table(name="registrationData")
-public class RegistrationData implements Serializable {
+@Table(name = "registrationData")
+public class RegistrationData implements Serializable, IsSerializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String regId;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String userName;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String password;
-	
+
 	@Lob
 	private String vCard;
 
@@ -45,12 +47,10 @@ public class RegistrationData implements Serializable {
 	public String getvCard() {
 		return vCard;
 	}
-	
+
 	public String getRegId() {
 		return regId;
 	}
-	
-	
 
 	public void setId(Long id) {
 		this.id = id;
@@ -71,6 +71,5 @@ public class RegistrationData implements Serializable {
 	public void setRegId(String registrationNumber) {
 		this.regId = registrationNumber;
 	}
-	
 
 }

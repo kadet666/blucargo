@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
 @Table(name = "favouriteoffer", uniqueConstraints = { @UniqueConstraint(columnNames = { "offerId", "userName" }) })
-public class FavouriteOffer implements Serializable {
+public class FavouriteOffer implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id

@@ -33,8 +33,7 @@ public class OfferList implements EntryPoint {
 
 		getCargoOffersAndPopulateTable(cargoOfferService, cargoOffers, table);
 
-		// Add it to the root panel.
-		RootPanel.get().add(table);
+		RootPanel.get("offerListArea").add(table);
 
 	}
 

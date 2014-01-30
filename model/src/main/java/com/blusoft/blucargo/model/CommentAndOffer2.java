@@ -3,18 +3,21 @@ package com.blusoft.blucargo.model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
-@Table(name="commentandoffer2")
-public class CommentAndOffer2 extends Comment{
-	
+@Table(name = "commentandoffer2")
+public class CommentAndOffer2 extends Comment implements IsSerializable {
+
 	private static final long serialVersionUID = -8826450526853859902L;
 
 	private String contact;
 	private String username;
 	private String owner;
 
-	public CommentAndOffer2(){}
-	
+	public CommentAndOffer2() {
+	}
+
 	public String getOwner() {
 		return owner;
 	}
@@ -38,5 +41,5 @@ public class CommentAndOffer2 extends Comment{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 }

@@ -12,10 +12,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="cargooffer")
-public class CargoOffer implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "cargooffer")
+public class CargoOffer implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -30,11 +32,10 @@ public class CargoOffer implements Serializable {
 	private Date availableFrom;
 	@Temporal(javax.persistence.TemporalType.DATE)
 	private Date availableTo;
-	
 
 	private String price;
 	private String comment;
-	
+
 	private String addressTo;
 	private String addressFrom;
 	private String body;
@@ -73,8 +74,6 @@ public class CargoOffer implements Serializable {
 	private String negotiable;
 	private String volume;
 	private boolean visible;
-	
-	
 
 	public Long getId() {
 		return id;
@@ -172,7 +171,6 @@ public class CargoOffer implements Serializable {
 		this.weight = weight;
 	}
 
-
 	public String getHds() {
 		return hds;
 	}
@@ -200,7 +198,7 @@ public class CargoOffer implements Serializable {
 	public String getAddressFrom() {
 		return addressFrom;
 	}
-	
+
 	public void setAddressFrom(String adr) {
 		this.addressFrom = adr;
 	}
@@ -356,7 +354,7 @@ public class CargoOffer implements Serializable {
 	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	public Date getAvailableFrom() {
 		return availableFrom;
 	}
@@ -405,5 +403,4 @@ public class CargoOffer implements Serializable {
 		this.cargoLoad = cargoLoad;
 	}
 
-	
 }

@@ -1,4 +1,3 @@
-
 package com.blusoft.blucargo.model;
 
 import java.io.Serializable;
@@ -11,140 +10,138 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="city")
-public class City implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "city")
+public class City implements Serializable, IsSerializable {
 
-    public City()
-    {
-        
-    }
+	public City() {
 
-    public City(int locId, String country, String region, String city,
-                String postalCode, double latitude, double longitude,
-                double metroCode, double areaCode)
-    {
-        this.setAreaCode(areaCode);
-        this.setCity(city);
-        this.setCountry(country);
-        this.setLatitude(latitude);
-        this.setLongitude(longitude);
-        this.setMetroCode(metroCode);
-        this.setPostalCode(postalCode);
-        this.setRegion(region);
-    }
+	}
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	public City(int locId, String country, String region, String city, String postalCode, double latitude, double longitude, double metroCode, double areaCode) {
+		this.setAreaCode(areaCode);
+		this.setCity(city);
+		this.setCountry(country);
+		this.setLatitude(latitude);
+		this.setLongitude(longitude);
+		this.setMetroCode(metroCode);
+		this.setPostalCode(postalCode);
+		this.setRegion(region);
+	}
 
-    private String country;
-    private String region;
-    private String city;
-    private String postalCode;
-    private double latitude;
-    private double longitude;
-    private double metroCode;
-    private double areaCode;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    public Long getId() {
-        return id;
-    }
+	private String country;
+	private String region;
+	private String city;
+	private String postalCode;
+	private double latitude;
+	private double longitude;
+	private double metroCode;
+	private double areaCode;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof City)) {
-            return false;
-        }
-        City other = (City) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
 
-    @Override
-    public String toString() {
-        return "com.blucargo.model.model.City[id=" + id + "]";
-    }
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are
+		// not set
+		if (!(object instanceof City)) {
+			return false;
+		}
+		City other = (City) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	@Override
+	public String toString() {
+		return "com.blucargo.model.model.City[id=" + id + "]";
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    public String getRegion() {
-        return region;
-    }
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
+	public String getRegion() {
+		return region;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public void setRegion(String region) {
+		this.region = region;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public String getPostalCode() {
-        return postalCode;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
+	public String getPostalCode() {
+		return postalCode;
+	}
 
-    public double getLatitude() {
-        return latitude;
-    }
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
+	public double getLatitude() {
+		return latitude;
+	}
 
-    public double getLongitude() {
-        return longitude;
-    }
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+	public double getLongitude() {
+		return longitude;
+	}
 
-    public double getMetroCode() {
-        return metroCode;
-    }
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 
-    public void setMetroCode(double metroCode) {
-        this.metroCode = metroCode;
-    }
+	public double getMetroCode() {
+		return metroCode;
+	}
 
-    public double getAreaCode() {
-        return areaCode;
-    }
+	public void setMetroCode(double metroCode) {
+		this.metroCode = metroCode;
+	}
 
-    public void setAreaCode(double areaCode) {
-        this.areaCode = areaCode;
-    }
+	public double getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(double areaCode) {
+		this.areaCode = areaCode;
+	}
 
 }

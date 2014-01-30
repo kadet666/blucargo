@@ -2,22 +2,22 @@ package com.blusoft.blucargo.model;
 
 public enum OfferType {
 
-    CARGO(1, "CARGO"), VEHICLE(10, "VEHICLE");
-    
-    private final String typeName;
-    private final int typeId;
-    
-    OfferType(int typeId, String typeName){
-        this.typeId = typeId;
-        this.typeName = typeName; 
-    }
+	CARGO(1, "CARGO"), VEHICLE(10, "VEHICLE");
 
-    public String getTypeName() {
-        return typeName;
-    }
+	private final String typeName;
+	private final int typeId;
 
-    public int getTypeId() {
-        return typeId;
-    }
+	OfferType(int typeId, String typeName) {
+		this.typeId = typeId;
+		this.typeName = typeName;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public int getTypeId() {
+		return typeId;
+	}
 
 }
