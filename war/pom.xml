@@ -8,7 +8,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>webapp</artifactId>
+	<artifactId>war</artifactId>
 	<packaging>war</packaging>
 
 	<properties>
@@ -22,7 +22,7 @@
 			<artifactId>service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.blusoft.blucargo</groupId>
 			<artifactId>model</artifactId>
@@ -35,12 +35,18 @@
 			<version>${project.parent.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -51,12 +57,12 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<scope>provided</scope>
+			<version>${gwt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
-			<scope>runtime</scope>
+			<version>${gwt.version}</version>
 		</dependency>
 
 	</dependencies>
@@ -82,11 +88,11 @@
 				<configuration>
 
 					<!-- runTarget>org.codehaus.mojo.gwt.test.Hello/Hello.html</runTarget -->
-					<runTarget>blucargo.html</runTarget>
+					<runTarget>offerList.html</runTarget>
 					<draftCompile>true</draftCompile>
 					<optimizationLevel>1</optimizationLevel>
 				</configuration>
-				<!--  dependencies>
+				<dependencies>
 					<dependency>
 						<groupId>com.google.gwt</groupId>
 						<artifactId>gwt-dev</artifactId>
@@ -102,25 +108,7 @@
 						<artifactId>gwt-user</artifactId>
 						<version>${gwt.version}</version>
 					</dependency>
-				</dependencies-->
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>exploded</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<!-- webappDirectory>${webappDirectory}</webappDirectory -->
-					<!-- warSourceDirectory>war</warSourceDirectory -->
-					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-				</configuration>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
