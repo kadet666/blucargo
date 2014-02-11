@@ -9,8 +9,8 @@
 	<properties>
 
 		<ehcache.version>2.6.3</ehcache.version>
-		<gwt.maven.plugin.version>2.6.0-rc3</gwt.maven.plugin.version>
-		<gwt.version>2.6.0-rc3</gwt.version>
+		<gwt.maven.plugin.version>2.4.0</gwt.maven.plugin.version>
+		<gwt.version>2.4.0</gwt.version>
 		<hibernate.version>4.1.7.Final</hibernate.version>
 		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
 		<hsqldb.version>2.2.8</hsqldb.version>
@@ -19,8 +19,8 @@
 		<log4j.version>1.2.17</log4j.version>
 		<mockito.version>1.9.5</mockito.version>
 		<org.springframework.version>3.2.6.RELEASE</org.springframework.version>
-	    <commons.dbcp>1.4</commons.dbcp>
-	    <joda.time.version>2.3</joda.time.version>
+		<commons.dbcp>1.4</commons.dbcp>
+		<joda.time.version>2.3</joda.time.version>
 
 		<!-- Maven plugins -->
 		<maven.exec.plugin.version>1.1.1</maven.exec.plugin.version>
@@ -57,7 +57,22 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.zeroturnaround</groupId>
+				<artifactId>jrebel-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-rebel-xml</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+
+
 	</build>
 
 	<dependencyManagement>
@@ -78,7 +93,7 @@
 	</dependencyManagement>
 
 	<dependencies>
-	    <dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>

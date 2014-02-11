@@ -24,10 +24,6 @@
 		<property name="password" value="blucargo" />
 	</bean>
 
-	<!--  jd:embedded-database id="dataSource" type="HSQL">
-		<jd:script location="file:/home/k/workspace/blucargo/dao/target/test-classes/sql/hsql-schema.sql" />
-	</jd:embedded-database-->
-
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -39,6 +35,23 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!--  jd:embedded-database id="dataSource" type="HSQL">
+		<jd:script location="classpath:sql/hsql-schema.sql" />
+		<jd:script location="classpath:sql/test-data.sql" />
+	</jd:embedded-database>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.blusoft.blucargo.model" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean-->
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -47,10 +60,8 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-
 
 </beans>
 

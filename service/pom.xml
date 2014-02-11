@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<parent>
-		<groupId>com.blusoft</groupId>
+		<groupId>com.blusoft.blucargo</groupId>
 		<artifactId>blucargo</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>

@@ -40,7 +40,7 @@
         hds varchar(255),
         loadingDate date,
         negotiable varchar(255),
-        numberOfPallettes bigint not null,
+        numberOfPallettes bigint,
         offerValid date,
         otherDelivery varchar(255),
         owner varchar(255),
@@ -54,7 +54,7 @@
         type integer,
         unloadingDate date,
         unstackablePalettes varchar(255),
-        visible boolean not null,
+        visible boolean,
         volume varchar(255),
         weight varchar(255),
         primary key (id)
