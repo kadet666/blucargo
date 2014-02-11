@@ -10,12 +10,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "carbody")
-public class CarBody implements Serializable, IsSerializable {
+public class CarBody implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

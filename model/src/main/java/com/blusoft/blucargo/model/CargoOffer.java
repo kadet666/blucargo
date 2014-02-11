@@ -7,15 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+// @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "cargooffer")
 public class CargoOffer implements Serializable, IsSerializable {
 
@@ -53,7 +51,7 @@ public class CargoOffer implements Serializable, IsSerializable {
 	private String dimensionOfPallettes;
 	private String elevator;
 	private String hds;
-	private long numberOfPallettes = 0;
+	private Long numberOfPallettes = 0L;
 	private String owner;
 	private String otherDelivery;
 	@Temporal(javax.persistence.TemporalType.DATE)
@@ -73,7 +71,11 @@ public class CargoOffer implements Serializable, IsSerializable {
 	private String cargoLoad;
 	private String negotiable;
 	private String volume;
-	private boolean visible;
+	private Boolean visible;
+
+	public CargoOffer() {
+
+	}
 
 	public Long getId() {
 		return id;

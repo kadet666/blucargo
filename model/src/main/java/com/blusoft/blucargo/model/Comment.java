@@ -11,11 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
 @Entity
 @Table(name = "comment")
-public class Comment implements Serializable, IsSerializable {
+public class Comment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

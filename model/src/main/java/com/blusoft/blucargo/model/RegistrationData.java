@@ -10,11 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
 @Entity
 @Table(name = "registrationData")
-public class RegistrationData implements Serializable, IsSerializable {
+public class RegistrationData implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

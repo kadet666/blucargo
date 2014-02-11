@@ -3,11 +3,9 @@ package com.blusoft.blucargo.model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
 @Entity
 @Table(name = "commentandoffer2")
-public class CommentAndOffer2 extends Comment implements IsSerializable {
+public class CommentAndOffer2 extends Comment {
 
 	private static final long serialVersionUID = -8826450526853859902L;
 
