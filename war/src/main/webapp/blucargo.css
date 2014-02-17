@@ -36,6 +36,16 @@ h1 {
   margin: 15px 6px 6px;
 }
 
+.offerDescription {
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+.offerAction {
+	font-size: 0.6em;
+}
+
+
 .cargoOffersTable th {
 	color:#FFFFFF;
 	text-shadow:none;

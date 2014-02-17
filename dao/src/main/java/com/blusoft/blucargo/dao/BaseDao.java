@@ -14,7 +14,6 @@ public interface BaseDao<T> {
 
 	public void saveOrUpdate(T entity);
 
-	// public EntityManager getEntityManager();
 	public Session getSession();
 
 }

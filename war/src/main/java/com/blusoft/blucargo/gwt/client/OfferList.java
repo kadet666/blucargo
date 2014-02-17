@@ -18,6 +18,9 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -26,6 +29,9 @@ import com.google.gwt.view.client.SingleSelectionModel;
 public class OfferList implements EntryPoint {
 
 	ListDataProvider<CargoOffer> dataProvider = new ListDataProvider<CargoOffer>();
+
+	// private CountriesMessages countries =
+	// GWT.create(CountriesMessages.class);
 
 	public void onModuleLoad() {
 
@@ -39,6 +45,17 @@ public class OfferList implements EntryPoint {
 
 		getCargoOffersAndPopulateTable(cargoOfferService, cargoOffers, table);
 
+		final HorizontalPanel horizontalPanel = new HorizontalPanel();
+
+		final Button saveButton = new Button("save");
+		final Button cancelButton = new Button("cancel");
+
+		horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+
+		horizontalPanel.add(saveButton);
+		horizontalPanel.add(cancelButton);
+
+		RootPanel.get("offerListArea").add(horizontalPanel);
 		RootPanel.get("offerListArea").add(table);
 
 	}
@@ -111,8 +128,9 @@ public class OfferList implements EntryPoint {
 			public SafeHtml getValue(CargoOffer offer) {
 
 				SafeHtmlBuilder sb = new SafeHtmlBuilder();
-				sb.appendHtmlConstant(offer.getContact()).appendHtmlConstant("<br>").appendHtmlConstant("<a href='call'>Zadzwoń</a>")
-						.appendHtmlConstant("<br>").appendHtmlConstant("<a href='write'>Napisz</a>").appendHtmlConstant("<br>");
+				sb.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getContact()).appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant("<a href='call'>Zadzwoń</a>").appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant("<a href='write'>Napisz</a>").appendHtmlConstant("</div>");
 
 				return sb.toSafeHtml();
 
@@ -131,7 +149,9 @@ public class OfferList implements EntryPoint {
 				String godzina = DateTimeFormat.getFormat("mm:KK").format(offer.getOfferValid());
 
 				SafeHtmlBuilder sb = new SafeHtmlBuilder();
-				sb.appendHtmlConstant(dzien).appendHtmlConstant("<br>").appendHtmlConstant("godz. ").appendHtmlConstant(godzina);
+				sb.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(dzien).appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant("godz. ").appendHtmlConstant(godzina)
+						.appendHtmlConstant("</div>");
 				return sb.toSafeHtml();
 
 			}
@@ -158,7 +178,9 @@ public class OfferList implements EntryPoint {
 				String godzina = DateTimeFormat.getFormat("mm:KK").format(offer.getSubmissionDate());
 
 				SafeHtmlBuilder sb = new SafeHtmlBuilder();
-				sb.appendHtmlConstant(dzien).appendHtmlConstant("<br>").appendHtmlConstant("godz. ").appendHtmlConstant(godzina);
+				sb.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(dzien).appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant("godz. ").appendHtmlConstant(godzina)
+						.appendHtmlConstant("<div>");
 
 				return sb.toSafeHtml();
 
@@ -184,8 +206,9 @@ public class OfferList implements EntryPoint {
 
 				SafeHtmlBuilder sb = new SafeHtmlBuilder();
 
-				sb.appendHtmlConstant(offer.getVolume()).appendHtmlConstant("<br>").appendHtmlConstant(offer.getBody())
-						.appendHtmlConstant(offer.getCargoLength());
+				sb.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getVolume()).appendHtmlConstant("<div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getBody()).appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getCargoLength()).appendHtmlConstant("</div>");
 				return sb.toSafeHtml();
 
 			}
@@ -202,8 +225,9 @@ public class OfferList implements EntryPoint {
 
 				SafeHtmlBuilder sb = new SafeHtmlBuilder();
 				sb.appendHtmlConstant("<img src='images/blucargo/countries/" + offer.getCountryTo().toUpperCase() + ".png' width='16' height='16'/></br>")
-						.appendHtmlConstant(offer.getCountryTo()).appendHtmlConstant("</br>").appendHtmlConstant(offer.getCityTo()).appendHtmlConstant("</br>")
-						.appendHtmlConstant(offer.getPostOfficeTo());
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getCountryTo()).appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getCityTo()).appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getPostOfficeTo()).appendHtmlConstant("<div>");
 				return sb.toSafeHtml();
 
 			}
@@ -231,8 +255,9 @@ public class OfferList implements EntryPoint {
 
 				SafeHtmlBuilder sb = new SafeHtmlBuilder();
 				sb.appendHtmlConstant("<img src='images/blucargo/countries/" + offer.getCountryFrom().toUpperCase() + ".png' width='16' height='16'/></br>")
-						.appendHtmlConstant(offer.getCountryFrom()).appendHtmlConstant("<br>").appendHtmlConstant(offer.getCityFrom())
-						.appendHtmlConstant("<br>").appendHtmlConstant(offer.getPostOfficeFrom());
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getCountryFrom()).appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getCityFrom()).appendHtmlConstant("</div>")
+						.appendHtmlConstant("<div class='offerDescription'>").appendHtmlConstant(offer.getPostOfficeFrom()).appendHtmlConstant("</div>");
 				return sb.toSafeHtml();
 
 			}
@@ -261,12 +286,12 @@ public class OfferList implements EntryPoint {
 
 				if (OfferType.CARGO == object.getType()) {
 					sb.appendHtmlConstant("<img src='images/blucargo/ladunek_ico.png' width='16' height='20'/></br>");
-					sb.appendHtmlConstant("Wolny ładunek</br>");
-					sb.appendHtmlConstant("Dodaj do ulubionych");
+					sb.appendHtmlConstant("<div class='offerDescription'>Wolny ładunek</div>");
+					sb.appendHtmlConstant("<div class='offerAction'>Dodaj do ulubionych<div>");
 				} else if (OfferType.VEHICLE == object.getType()) {
 					sb.appendHtmlConstant("<img src='images/blucargo/pojazd_ico.png' width='16' height='20'/></br>");
-					sb.appendHtmlConstant("Wolny pojazd</br>");
-					sb.appendHtmlConstant("Dodaj do ulubionych");
+					sb.appendHtmlConstant("<div class='offerDescription'>Wolny pojazd</div>");
+					sb.appendHtmlConstant("<div class='offerAction'>Dodaj do ulubionych</div>");
 				}
 
 				return sb.toSafeHtml();
