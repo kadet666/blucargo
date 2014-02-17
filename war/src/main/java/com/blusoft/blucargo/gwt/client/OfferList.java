@@ -18,9 +18,10 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -47,13 +48,43 @@ public class OfferList implements EntryPoint {
 
 		final HorizontalPanel horizontalPanel = new HorizontalPanel();
 
-		final Button saveButton = new Button("save");
-		final Button cancelButton = new Button("cancel");
+		final PushButton startButton = new PushButton(new Image("images/blucargo/menu_start1.jpg"));
+		final PushButton vehicleButton = new PushButton(new Image("images/blucargo/menu_pojazd1.jpg"));
+		final PushButton cargoButton = new PushButton(new Image("images/blucargo/menu_ladunek1.jpg"));
+		final PushButton chatsButton = new PushButton(new Image("images/blucargo/menu_rozmowy1.jpg"));
+		final PushButton debtorsButton = new PushButton(new Image("images/blucargo/menu_dluznicy1.jpg"));
+		final PushButton companyRankingButton = new PushButton(new Image("images/blucargo/menu_ranking1.jpg"));
+		final PushButton settingsButton = new PushButton(new Image("images/blucargo/menu_ustawienia1.jpg"));
+		final PushButton helpButton = new PushButton(new Image("images/blucargo/menu_pomoc1.jpg"));
+
+		startButton.getUpHoveringFace().setImage(new Image("images/blucargo/menu_start2.jpg"));
+		vehicleButton.getUpHoveringFace().setImage(new Image("images/blucargo/menu_pojazd2.jpg"));
+		cargoButton.getUpHoveringFace().setImage(new Image("images/blucargo/menu_ladunek2.jpg"));
+		chatsButton.getUpHoveringFace().setImage(new Image("images/blucargo/menu_rozmowy2.jpg"));
+		debtorsButton.getUpHoveringFace().setImage(new Image("images/blucargo/menu_dluznicy2.jpg"));
+		companyRankingButton.getUpHoveringFace().setImage(new Image("images/blucargo/menu_ranking2.jpg"));
+		settingsButton.getUpHoveringFace().setImage(new Image("images/blucargo/menu_ustawienia2.jpg"));
+		helpButton.getUpHoveringFace().setImage(new Image("images/blucargo/menu_pomoc2.jpg"));
+
+		startButton.setStyleName("menuButton");
+		vehicleButton.setStyleName("menuButton");
+		cargoButton.setStyleName("menuButton");
+		chatsButton.setStyleName("menuButton");
+		debtorsButton.setStyleName("menuButton");
+		companyRankingButton.setStyleName("menuButton");
+		settingsButton.setStyleName("menuButton");
+		helpButton.setStyleName("menuButton");
 
 		horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 
-		horizontalPanel.add(saveButton);
-		horizontalPanel.add(cancelButton);
+		horizontalPanel.add(startButton);
+		horizontalPanel.add(vehicleButton);
+		horizontalPanel.add(cargoButton);
+		horizontalPanel.add(chatsButton);
+		horizontalPanel.add(debtorsButton);
+		horizontalPanel.add(companyRankingButton);
+		horizontalPanel.add(settingsButton);
+		horizontalPanel.add(helpButton);
 
 		RootPanel.get("offerListArea").add(horizontalPanel);
 		RootPanel.get("offerListArea").add(table);
