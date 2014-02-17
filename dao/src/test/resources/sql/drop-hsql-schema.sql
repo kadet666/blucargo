@@ -1,4 +1,7 @@
 
+    drop table BC_DICTIONARY if exists
+;
+
     drop table acceptedoffer if exists
 ;
 
