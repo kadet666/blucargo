@@ -83,3 +83,47 @@ h1 {
 	border-right: none;
 
 }
+
+.gwt-TabBar .gwt-TabBarItem {
+	
+	color: none !important;
+	margin: 0px !important;
+	padding: 0px !important;
+}
+
+.gwt-TabBarItem-wrapper .gwt-TabBarItem {
+	width: 83px;
+	height: 65px;
+}
+
+.gwt-TabBarItem-wrapper:nth-child(2) .gwt-TabBarItem {
+	background-image: url('images/blucargo/menu_start1.jpg');
+}
+
+.gwt-TabBarItem-wrapper:nth-child(3) .gwt-TabBarItem {
+	background-image: url('images/blucargo/menu_pojazd1.jpg');
+}
+
+.gwt-TabBarItem-wrapper:nth-child(4) .gwt-TabBarItem {
+	background-image: url('images/blucargo/menu_ladunek1.jpg');
+}
+
+.gwt-TabBarItem-wrapper:nth-child(5) .gwt-TabBarItem {
+	background-image: url('images/blucargo/menu_rozmowy1.jpg');
+}
+
+.gwt-TabBarItem-wrapper:nth-child(6) .gwt-TabBarItem {
+	background-image: url('images/blucargo/menu_dluznicy1.jpg');
+}
+
+.gwt-TabBarItem-wrapper:nth-child(7) .gwt-TabBarItem {
+	background-image: url('images/blucargo/menu_ranking1.jpg');
+}
+
+.gwt-TabBarItem-wrapper:nth-child(8) .gwt-TabBarItem {
+	background-image: url('images/blucargo/menu_ustawienia1.jpg');
+}
+
+.gwt-TabBarItem-wrapper:nth-child(9) .gwt-TabBarItem {
+	background-image: url('images/blucargo/menu_pomoc1.jpg');
+}

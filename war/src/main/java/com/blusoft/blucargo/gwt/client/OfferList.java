@@ -9,6 +9,7 @@ import com.blusoft.blucargo.model.OfferType;
 import com.google.gwt.cell.client.SafeHtmlCell;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
@@ -18,11 +19,13 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -77,17 +80,35 @@ public class OfferList implements EntryPoint {
 
 		horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 
-		horizontalPanel.add(startButton);
-		horizontalPanel.add(vehicleButton);
-		horizontalPanel.add(cargoButton);
-		horizontalPanel.add(chatsButton);
-		horizontalPanel.add(debtorsButton);
-		horizontalPanel.add(companyRankingButton);
-		horizontalPanel.add(settingsButton);
-		horizontalPanel.add(helpButton);
+		 horizontalPanel.add(startButton);
+		 horizontalPanel.add(vehicleButton);
+		 horizontalPanel.add(cargoButton);
+		 horizontalPanel.add(chatsButton);
+		 horizontalPanel.add(debtorsButton);
+		 horizontalPanel.add(companyRankingButton);
+		 horizontalPanel.add(settingsButton);
+		 horizontalPanel.add(helpButton);
 
-		RootPanel.get("offerListArea").add(horizontalPanel);
-		RootPanel.get("offerListArea").add(table);
+		TabPanel tabPanel = new TabPanel();
+		tabPanel.getElement().getStyle().setMarginBottom(10.0, Unit.PX);
+
+		tabPanel.add(table, "");
+		tabPanel.add(vehicleButton, "");
+		tabPanel.add(cargoButton, "");
+		tabPanel.add(chatsButton, "");
+		tabPanel.add(debtorsButton, "");
+		tabPanel.add(companyRankingButton, "");
+		tabPanel.add(settingsButton, "");
+		tabPanel.add(helpButton, "");
+
+		// RootPanel.get("offerListArea").add(horizontalPanel);
+		// RootPanel.get("offerListArea").add(table);
+
+		tabPanel.setSize("800", "600");
+		tabPanel.selectTab(0);
+		tabPanel.ensureDebugId("cwTabPanel");
+
+		RootPanel.get().add(tabPanel);
 
 	}
 
