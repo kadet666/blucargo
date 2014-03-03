@@ -1,0 +1,12 @@
+<module rename-to="offerList">
+  <inherits name="com.google.gwt.user.User"/>
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+  <inherits name='com.blusoft.blucargo.Model'/>
+  <inherits name="org.apache.log4j.Log4j" />
+
+  <entry-point class="com.blusoft.blucargo.gwt.client.OfferList"/>
+
+  <source path='client' />
+  <source path='shared' />
+
+</module>

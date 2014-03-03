@@ -4,17 +4,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import com.blusoft.blucargo.model.CarBody;
 import com.blusoft.blucargo.model.CargoOffer;
-import com.blusoft.blucargo.model.City;
-import com.blusoft.blucargo.model.Country;
 import com.blusoft.blucargo.model.OfferType;
 import com.google.gwt.cell.client.SafeHtmlCell;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
@@ -24,14 +18,11 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -40,12 +31,12 @@ public class OfferList implements EntryPoint {
 
 	ListDataProvider<CargoOffer> dataProvider = new ListDataProvider<CargoOffer>();
 
+	// private CountriesMessages countries =
+	// GWT.create(CountriesMessages.class);
+
 	public void onModuleLoad() {
 
-		final CargoOfferGWTServiceAsync cargoOfferService = (CargoOfferGWTServiceAsync) GWT.create(CargoOfferGWTService.class);
-		final CountryGWTServiceAsync countryService = (CountryGWTServiceAsync) GWT.create(CountryGWTService.class);
-		final CityGWTServiceAsync cityService = (CityGWTServiceAsync) GWT.create(CityGWTService.class);
-		final CarBodyGWTServiceAsync carBodyService = (CarBodyGWTServiceAsync) GWT.create(CarBodyGWTService.class);
+		CargoOfferGWTServiceAsync cargoOfferService = (CargoOfferGWTServiceAsync) GWT.create(CargoOfferGWTService.class);
 
 		final List<CargoOffer> cargoOffers = new ArrayList<CargoOffer>();
 
@@ -54,6 +45,8 @@ public class OfferList implements EntryPoint {
 		dataProvider.addDataDisplay(table);
 
 		getCargoOffersAndPopulateTable(cargoOfferService, cargoOffers, table);
+
+		final HorizontalPanel horizontalPanel = new HorizontalPanel();
 
 		final PushButton startButton = new PushButton(new Image("images/blucargo/menu_start1.jpg"));
 		final PushButton vehicleButton = new PushButton(new Image("images/blucargo/menu_pojazd1.jpg"));
@@ -82,156 +75,20 @@ public class OfferList implements EntryPoint {
 		settingsButton.setStyleName("menuButton");
 		helpButton.setStyleName("menuButton");
 
-		TabPanel tabPanel = new TabPanel();
-		tabPanel.getElement().getStyle().setMarginBottom(10.0, Unit.PX);
+		horizontalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 
-		final ListBox departureCountries = new ListBox(false);
-		final ListBox arrivalCountries = new ListBox(false);
-		final ListBox departureCities = new ListBox(false);
-		final ListBox arrivalCities = new ListBox(false);
-		final ListBox bodies = new ListBox(false);
-		bodies.addItem("Nadwozie");
+		horizontalPanel.add(startButton);
+		horizontalPanel.add(vehicleButton);
+		horizontalPanel.add(cargoButton);
+		horizontalPanel.add(chatsButton);
+		horizontalPanel.add(debtorsButton);
+		horizontalPanel.add(companyRankingButton);
+		horizontalPanel.add(settingsButton);
+		horizontalPanel.add(helpButton);
 
-		final ListBox weight = new ListBox(false);
-		weight.addItem("Waga");
+		RootPanel.get("offerListArea").add(horizontalPanel);
+		RootPanel.get("offerListArea").add(table);
 
-		final AsyncCallback departureCitiesCallback = new AsyncCallback() {
-
-			public void onFailure(Throwable caught) {
-				// do some UI stuff to show failure
-			}
-
-			public void onSuccess(Object result) {
-
-				departureCities.addItem("Miasto wyjazdu");
-
-				List<City> list = (List<City>) result;
-				for (City city : list) {
-					departureCities.addItem(city.getCity(), city.getId().toString());
-				}
-
-			}
-		};
-
-		final AsyncCallback arrivalCitiesCallback = new AsyncCallback() {
-
-			public void onFailure(Throwable caught) {
-				// do some UI stuff to show failure
-			}
-
-			public void onSuccess(Object result) {
-
-				arrivalCities.addItem("Miasto przyjazdu");
-
-				List<City> list = (List<City>) result;
-				for (City city : list) {
-					arrivalCities.addItem(city.getCity(), city.getId().toString());
-				}
-
-			}
-		};
-
-		departureCountries.addChangeHandler(new ChangeHandler() {
-
-			public void onChange(ChangeEvent event) {
-
-				String countryCode = departureCountries.getValue(departureCountries.getSelectedIndex());
-				cityService.findCitiesByCountry(countryCode, departureCitiesCallback);
-			}
-
-		});
-
-		arrivalCountries.addChangeHandler(new ChangeHandler() {
-
-			public void onChange(ChangeEvent event) {
-
-				String countryCode = arrivalCountries.getValue(arrivalCountries.getSelectedIndex());
-				cityService.findCitiesByCountry(countryCode, arrivalCitiesCallback);
-			}
-
-		});
-
-		populateDepartureAndArrivalCountries(countryService, departureCountries, arrivalCountries);
-		populateBodies(carBodyService, bodies);
-
-		HorizontalPanel searchPanel1 = new HorizontalPanel();
-		HorizontalPanel searchPanel2 = new HorizontalPanel();
-		searchPanel1.add(departureCountries);
-		searchPanel1.add(arrivalCountries);
-		searchPanel1.add(bodies);
-
-		searchPanel2.add(departureCities);
-		searchPanel2.add(arrivalCities);
-		searchPanel2.add(weight);
-
-		Panel mainPanel = new FlowPanel();
-		mainPanel.add(searchPanel1);
-		mainPanel.add(searchPanel2);
-
-		mainPanel.add(table);
-
-		tabPanel.add(mainPanel, "");
-		tabPanel.add(vehicleButton, "");
-		tabPanel.add(cargoButton, "");
-		tabPanel.add(chatsButton, "");
-		tabPanel.add(debtorsButton, "");
-		tabPanel.add(companyRankingButton, "");
-		tabPanel.add(settingsButton, "");
-		tabPanel.add(helpButton, "");
-
-		// RootPanel.get("offerListArea").add(horizontalPanel);
-		// RootPanel.get("offerListArea").add(table);
-
-		tabPanel.setSize("800", "600");
-		tabPanel.selectTab(0);
-		tabPanel.ensureDebugId("cwTabPanel");
-
-		RootPanel.get().add(tabPanel);
-
-	}
-
-	private void populateDepartureAndArrivalCountries(CountryGWTServiceAsync countryService, final ListBox departureCountries, final ListBox arrivalCountries) {
-		AsyncCallback departureCountriesCallback = new AsyncCallback() {
-
-			public void onFailure(Throwable caught) {
-				// do some UI stuff to show failure
-			}
-
-			public void onSuccess(Object result) {
-
-				departureCountries.addItem("Kraj wyjazdu");
-				arrivalCountries.addItem("Kraj przyjazdu");
-
-				List<Country> list = (List<Country>) result;
-				for (Country country : list) {
-					departureCountries.addItem(country.getName(), country.getIso_3166_1_alfa_2());
-					arrivalCountries.addItem(country.getName(), country.getIso_3166_1_alfa_2());
-				}
-
-			}
-		};
-
-		countryService.findAll(departureCountriesCallback);
-	}
-
-	private void populateBodies(CarBodyGWTServiceAsync countryService, final ListBox bodies) {
-		AsyncCallback departureCountriesCallback = new AsyncCallback() {
-
-			public void onFailure(Throwable caught) {
-				// do some UI stuff to show failure
-			}
-
-			public void onSuccess(Object result) {
-
-				List<CarBody> list = (List<CarBody>) result;
-				for (CarBody carBody : list) {
-					bodies.addItem(carBody.getName(), carBody.getId().toString());
-				}
-
-			}
-		};
-
-		countryService.findAll(departureCountriesCallback);
 	}
 
 	private void getCargoOffersAndPopulateTable(CargoOfferGWTServiceAsync cargoOfferService, final List<CargoOffer> cargoOffers,

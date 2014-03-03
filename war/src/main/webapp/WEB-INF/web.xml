@@ -26,6 +26,21 @@
 		<servlet-class>com.blusoft.blucargo.gwt.server.CargoOfferGWTServiceImpl</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>countryGWTService</servlet-name>
+		<servlet-class>com.blusoft.blucargo.gwt.server.CountryGWTServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>cityGWTService</servlet-name>
+		<servlet-class>com.blusoft.blucargo.gwt.server.CityGWTServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>carBodyGWTService</servlet-name>
+		<servlet-class>com.blusoft.blucargo.gwt.server.CarBodyGWTServiceImpl</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>testService</servlet-name>
 		<url-pattern>/hello/testService</url-pattern>
@@ -36,6 +51,22 @@
 		<url-pattern>/offerList/CargoOfferGWTService</url-pattern>
 	</servlet-mapping>
 
+	<servlet-mapping>
+		<servlet-name>carBodyGWTService</servlet-name>
+		<url-pattern>/offerList/CarBodyGWTService</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>countryGWTService</servlet-name>
+		<url-pattern>/offerList/CountryGWTService</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>cityGWTService</servlet-name>
+		<url-pattern>/offerList/CityGWTService</url-pattern>
+	</servlet-mapping>
+	
+	
  	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>offerList.html</welcome-file>
